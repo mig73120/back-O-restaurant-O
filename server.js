@@ -2,7 +2,7 @@
 import "./app/helpers/env.load.js";
 
 // connexion DB
-//import "./app/utils/connect_database.js";
+import "./app/utils/connect.db.js";
 
 // Third party dependencies
 import express from "express";
