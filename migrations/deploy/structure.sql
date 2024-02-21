@@ -3,7 +3,7 @@ BEGIN;
 CREATE TABLE user (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
   "userFirstName" TEXT NOT NULL,
-  "lastname" TEXT NOT NULL,
+  "lastName" TEXT NOT NULL,
   "adress" TEXT NOT NULL,
   "city" TEXT NOT NULL,
   "zip" TEXT NOT NULL,
@@ -30,8 +30,8 @@ CREATE TABLE restaurant (
 );
 
 CREATE TABLE user_has_restaurant (
-    user_id INT,
-    restaurant_id INT,
+    "user_id" INT,
+    "restaurant_id" INT,
     owner BOOLEAN,
     PRIMARY KEY (user_id, restaurant_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),
