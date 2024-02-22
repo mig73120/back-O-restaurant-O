@@ -7,7 +7,6 @@ async getAllRestaurant(req,res) {
     try {
         
         const restaurant = await Restaurant.findAll();
-        
         res.status(200).json(restaurant);
     } catch (error) {
         console.error(error);
@@ -17,9 +16,9 @@ async getAllRestaurant(req,res) {
 
 // Exemple de fonction pour créer un nouveau restaurant
 async  createRestaurant(req, res) {
-    const { restaurantName, email } = req.body;
+    const data = {...req.body};
     try {
-        const newRestaurant = await Restaurant.create({ restaurantName, email });
+        const newRestaurant = await Restaurant.create(data);
         res.status(201).json(newRestaurant);
     } catch (error) {
         console.error(error);
@@ -35,7 +34,7 @@ async getRestaurantById(req, res) {
         if (!restaurant) {
             return res.status(404).json({ message: "Restaurant non trouvé" });
         }
-        res.json(user);
+        res.status(200).json(restaurant);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la récupération du restaurant" });
@@ -43,18 +42,16 @@ async getRestaurantById(req, res) {
 },
 
 // Exemple de fonction pour mettre à jour un restaurant
-async  updateRestaurant(req, res) {
+async updateRestaurant(req, res) {
     const restaurantId = req.params.id;
-    const { restaurantName, email } = req.body;
+    const newRestaurant ={...req.body}
     try {
         const restaurant = await Restaurant.findByPk(restaurantId);
         if (!restaurant) {
             return res.status(404).json({ message: "Restaurant non trouvé" });
         }
-        restaurant.restaurantName = restaurantName;
-        restaurant.email = email;
-        await restaurant.save();
-        res.json(restaurant);
+        await restaurant.update(newRestaurant);
+        res.status(200).json(newRestaurant);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la mise à jour du restaurant" });

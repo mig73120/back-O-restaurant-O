@@ -6,7 +6,7 @@ const userController = {
 async getAllUsers(req,res) {
     try {
         const users = await User.findAll();
-        console.log("USERS",users);
+        
         res.status(200).json(users);
     } catch (error) {
         console.error(error);
@@ -30,12 +30,11 @@ async createUser(req, res) {
 async getUserById(req, res) {
     const userId = req.params.id;
     try {
-        
         const user = await User.findByPk(userId);
         if (!user) {
             return res.status(404).json({ message: "Utilisateur non trouvé" });
         }
-        res.json(user);
+        res.status(200).json(user);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la récupération de l'utilisateur" });
@@ -45,16 +44,14 @@ async getUserById(req, res) {
 // Exemple de fonction pour mettre à jour un utilisateur
 async updateUser(req, res) {
     const userId = req.params.id;
-    const { userFirstNname, email } = req.body;
+    const newData = {...req.body};
     try {
         const user = await User.findByPk(userId);
         if (!user) {
             return res.status(404).json({ message: "Utilisateur non trouvé" });
         }
-        user.userFirstName = userFirstName;
-        user.email = email;
-        await user.save();
-        res.json(user);
+        await user.update(newData);
+        res.status(200).json(newData);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la mise à jour de l'utilisateur" });
@@ -63,14 +60,10 @@ async updateUser(req, res) {
 
 // Exemple de fonction pour supprimer un utilisateur
 async deleteUser(req, res) {
-    const userId = req.params.id;
+    const id = req.params.id;
     try {
-        const user = await User.findByPk(userId);
-        if (!user) {
-            return res.status(404).json({ message: "Utilisateur non trouvé" });
-        }
-        await user.destroy();
-        res.json({ message: "Utilisateur supprimé avec succès" });
+        await User.destroy({where : {id}});
+        res.status(200).json({ message: "Utilisateur supprimé avec succès" });
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la suppression de l'utilisateur" });
