@@ -1,15 +1,12 @@
 import { DataTypes , Model  } from "sequelize";
-import sequelize from"../app/utils/connect.db.js";
+import sequelize from "../utils/connect.db.js"
 
-class User extends Model {}
+class Restaurant extends Model {}
 
-User.init(
+Restaurant.init(
     {
-        userFirstName: {
-            type:DataTypes.STRING,
-            allowNull: false
-        },
-        lastname: {
+      
+        name: {
             type:DataTypes.STRING,
             allowNull: false
         },
@@ -33,32 +30,24 @@ User.init(
             type:DataTypes.STRING,
             allowNull: false
         },
-        owner: {
+        owner_id: {
             type:DataTypes.BOOLEAN,
             allowNull: false
         },
-        password: {
-            type:DataTypes.STRING,
+        createdAt: {
+            type:DataTypes.DATE,
             allowNull: false
         },
-        profil_picture: {
-            type:DataTypes.STRING,
-            allowNull: false
-        },
-        created_at: {
-            type:DataTypes.STRING,
-            allowNull: false
-        },
-        updated_at: {
-            type:DataTypes.STRING,
+        updatedAt: {
+            type:DataTypes.DATE,
             allowNull: false
         },
 
     },
     {
         sequelize,
-        tableName:"user",
+        tableName:"restaurant",
     }
 );
 
-export default User
+export default Restaurant

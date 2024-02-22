@@ -2,7 +2,7 @@ import Sequelize from "sequelize";
 
 const sequelize = new Sequelize({
   dialect: "sqlite",
-  storage: process.env.STORAGE
+  storage: "C:/Users/Torrent/OneDrive/Bureau/TITRE PROFESSIONNEL/O-restaurant/back-O-restaurant-O/db/db.sqlite"
 });
 
 try {

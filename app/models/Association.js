@@ -1,5 +1,5 @@
 import Restaurant from "./Restaurant.js";
-import User from "./path/to/User.js";
+import User from "./User.js";
 
 // Relation One-to-Many: Un utilisateur peut avoir plusieurs restaurants
 User.hasMany(Restaurant, {

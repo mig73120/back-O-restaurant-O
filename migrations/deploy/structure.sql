@@ -2,7 +2,7 @@ BEGIN;
 
 CREATE TABLE user (
   id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
-  "userFirstName" TEXT NOT NULL,
+  "firstName" TEXT NOT NULL,
   "lastName" TEXT NOT NULL,
   "adress" TEXT NOT NULL,
   "city" TEXT NOT NULL,
@@ -12,8 +12,8 @@ CREATE TABLE user (
   "owner" BOOLEAN NOT NULL DEFAULT false, 
   "password" TEXT NOT NULL,
   "profil_picture" TEXT UNIQUE,
-  "created_at" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" DATE
+  "createdAt" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" DATE
 );
 
 CREATE TABLE restaurant (
@@ -25,13 +25,13 @@ CREATE TABLE restaurant (
   "email" TEXT NOT NULL UNIQUE,
   "phone" TEXT NOT NULL UNIQUE,
   "owner_id" INT,
-  "created_at" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  "updated_at" DATE
+  "createdAt" DATE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  "updatedAt" DATE
 );
 
 CREATE TABLE user_has_restaurant (
-    "user_id" INT,
-    "restaurant_id" INT,
+    user_id INT,
+    restaurant_id INT,
     owner BOOLEAN,
     PRIMARY KEY (user_id, restaurant_id),
     FOREIGN KEY (user_id) REFERENCES user(user_id),

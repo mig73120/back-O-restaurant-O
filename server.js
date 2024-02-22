@@ -9,7 +9,7 @@ import express from "express";
 import cors from "cors";
 
 // Local dependencies
-//import router from "./app/router/index.js";
+import router from "./app/routers/router.js";
 
 // ===== Create server =====
 const app = express();
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cors());
 
 // plug router
-//app.use(router);
+app.use(router);
 
 // Start application
 const PORT = process.env.PORT;

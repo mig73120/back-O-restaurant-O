@@ -1,28 +1,23 @@
-const express = require('express');
+import express from "express";
 const router = express.Router();
-const { getAllUsers, createUser, getUserById, updateUser, deleteUser } = require('./controllers/userController');
-const restaurantController = require('./controllers/restaurantController');
+import restaurantController from "../controllers/restaurantController.js";
+import userController from "../controllers/userController.js";
+
 
 // Route pour récupérer tous les utilisateurs
-router.get('/users', getAllUsers);
+router.get('/users', userController.getAllUsers );
 
 // Route pour créer un nouvel utilisateur
-router.post('/users', createUser);
+router.post('/users', userController.createUser);
 
 // Route pour récupérer un utilisateur par son ID
-router.get('/users/:id', getUserById);
+router.get('/users/:id', userController.getUserById);
 
 // Route pour mettre à jour un utilisateur
-router.put('/users/:id', updateUser);
+router.put('/users/:id', userController.updateUser);
 
 // Route pour supprimer un utilisateur
-router.delete('/users/:id', deleteUser);
-
-
-
-// Import des dépendances
-
-
+router.delete('/users/:id', userController.deleteUser);
 
 // Route pour récupérer tous les restaurants
 router.get('/restaurants', restaurantController.getAllRestaurant);
@@ -40,4 +35,4 @@ router.put('/restaurants/:id', restaurantController.updateRestaurant);
 router.delete('/restaurants/:id', restaurantController.deleteRestaurant);
 
 // Export du routeur
-module.exports = router;
+export default router

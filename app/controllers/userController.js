@@ -1,32 +1,36 @@
-const { User } = require('./models'); // Assurez-vous que le chemin est correct selon l'emplacement de votre modèle Sequelize
+import Models from "../models/Association.js"
+const {User} = Models
 
+const userController = {
 // Exemple de fonction pour récupérer tous les utilisateurs
-async function getAllUsers(res) {
+async getAllUsers(req,res) {
     try {
         const users = await User.findAll();
-        res.json(users);
+        console.log("USERS",users);
+        res.status(200).json(users);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la récupération des utilisateurs" });
     }
-}
+},
 
 // Exemple de fonction pour créer un nouvel utilisateur
-async function createUser(req, res) {
-    const { userFirstName, email } = req.body;
+async createUser(req, res) {
+    const data = {...req.body};
     try {
-        const newUser = await User.create({ userFirstName, email });
+        const newUser = await User.create(data);
         res.status(201).json(newUser);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
     }
-}
+},
 
 // Exemple de fonction pour récupérer un utilisateur par son ID
-async function getUserById(req, res) {
+async getUserById(req, res) {
     const userId = req.params.id;
     try {
+        
         const user = await User.findByPk(userId);
         if (!user) {
             return res.status(404).json({ message: "Utilisateur non trouvé" });
@@ -36,10 +40,10 @@ async function getUserById(req, res) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la récupération de l'utilisateur" });
     }
-}
+},
 
 // Exemple de fonction pour mettre à jour un utilisateur
-async function updateUser(req, res) {
+async updateUser(req, res) {
     const userId = req.params.id;
     const { userFirstNname, email } = req.body;
     try {
@@ -55,10 +59,10 @@ async function updateUser(req, res) {
         console.error(error);
         res.status(500).json({ message: "Erreur lors de la mise à jour de l'utilisateur" });
     }
-}
+},
 
 // Exemple de fonction pour supprimer un utilisateur
-async function deleteUser(req, res) {
+async deleteUser(req, res) {
     const userId = req.params.id;
     try {
         const user = await User.findByPk(userId);
@@ -72,11 +76,7 @@ async function deleteUser(req, res) {
         res.status(500).json({ message: "Erreur lors de la suppression de l'utilisateur" });
     }
 }
+}
 
-module.exports = {
-    getAllUsers,
-    createUser,
-    getUserById,
-    updateUser,
-    deleteUser
-};
+
+export default userController
