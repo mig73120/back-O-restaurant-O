@@ -14,18 +14,6 @@ async getAllUsers(req,res) {
     }
 },
 
-// Exemple de fonction pour créer un nouvel utilisateur
-async createUser(req, res) {
-    const data = {...req.body};
-    try {
-        const newUser = await User.create(data);
-        res.status(201).json(newUser);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Erreur lors de la création de l'utilisateur" });
-    }
-},
-
 // Exemple de fonction pour récupérer un utilisateur par son ID
 async getUserById(req, res) {
     const userId = req.params.id;
