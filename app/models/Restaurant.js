@@ -1,11 +1,8 @@
 import { DataTypes , Model  } from "sequelize";
 import sequelize from "../utils/connect.db.js"
-
 class Restaurant extends Model {}
-
 Restaurant.init(
     {
-      
         name: {
             type:DataTypes.STRING,
             allowNull: false
@@ -42,12 +39,10 @@ Restaurant.init(
             type:DataTypes.DATE,
             allowNull: false
         },
-
     },
     {
         sequelize,
         tableName:"restaurant",
     }
 );
-
 export default Restaurant
